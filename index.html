@@ -31,7 +31,7 @@
     }
 
     h1 {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       font-weight: 500;
     }
 
@@ -39,27 +39,27 @@
       background: var(--frame-bg);
       padding: 15px;
       border-radius: 20px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-      max-width: 420px; /* controls overall frame size */
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
       transition: transform 0.3s ease;
     }
 
-    .frame:hover {
-      transform: scale(1.02);
-    }
-
     .photo {
-      width: 100%;
-      height: auto;
       border-radius: 15px;
       display: block;
       object-fit: cover;
+      transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+      width: 576px;  /* 6 inches */
+      height: 384px; /* 4 inches */
+      max-width: 100%;
     }
 
-    .toggle-theme {
-      position: fixed;
-      top: 20px;
-      right: 20px;
+    .controls {
+      margin-top: 1rem;
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
       background: rgba(0, 0, 0, 0.1);
       border: none;
       border-radius: 25px;
@@ -69,13 +69,20 @@
       transition: background 0.3s;
     }
 
-    .toggle-theme:hover {
+    button:hover {
       background: rgba(0, 0, 0, 0.2);
     }
 
+    .toggle-theme {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+    }
+
     @media (max-width: 600px) {
-      .frame {
-        max-width: 85%;
+      .photo {
+        width: 90%;
+        height: auto;
       }
     }
   </style>
@@ -83,9 +90,36 @@
 <body>
   <button class="toggle-theme" onclick="toggleTheme()">🌙 Dark</button>
   <h1>Beautiful Family</h1>
-  
+
   <div class="frame">
-    <img src="IMG_20250526_192157.jpg" alt="Family Photo" class="photo" />
+    <img id="familyPhoto" src="IMG_20250526_192157.jpg" alt="Family Photo" class="photo" />
   </div>
 
-  <script
+  <div class="controls">
+    <button onclick="zoom(-0.1)">➖ Zoom Out</button>
+    <button onclick="zoom(0.1)">➕ Zoom In</button>
+  </div>
+
+  <script>
+    // Theme toggle
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+      const btn = document.querySelector(".toggle-theme");
+      btn.textContent = document.body.classList.contains("dark")
+        ? "☀️ Light"
+        : "🌙 Dark";
+    }
+
+    // Zoom feature
+    let scale = 1;
+    const img = document.getElementById("familyPhoto");
+
+    function zoom(delta) {
+      scale += delta;
+      if (scale < 0.5) scale = 0.5;
+      if (scale > 2.5) scale = 2.5;
+      img.style.transform = `scale(${scale})`;
+    }
+  </script>
+</body>
+</html>
