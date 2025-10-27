@@ -23,17 +23,16 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      padding: 0;
       transition: background 0.4s ease, color 0.4s ease;
     }
 
     img {
       width: 100%;
-      height: auto;
       max-width: 900px;
+      height: auto;
       display: block;
-      border-radius: 0;
-      box-shadow: none;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
     }
 
     h1 {
@@ -79,25 +78,4 @@
       transition: background 0.3s ease;
     }
 
-    .toggle:hover {
-      background: #16a34a;
-    }
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-</head>
-<body>
-  <button class="toggle" id="modeToggle">🌙 Dark Mode</button>
-  <img src="/mnt/data/IMG_20250526_192157.jpg" alt="Family photo">
-  <h1>Our Beautiful Family</h1>
-  <p>A peaceful evening moment filled with smiles, warmth, and love — forever cherished.</p>
-
-  <script>
-    const toggle = document.getElementById('modeToggle');
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      const isDark = document.body.classList.contains('dark');
-      toggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
-    });
-  </script>
-</body>
-</html>
+    .toggle:
