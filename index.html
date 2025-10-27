@@ -8,11 +8,13 @@
     :root {
       --bg-color: #f4f4f4;
       --text-color: #222;
+      --frame-bg: #fff;
     }
 
     body.dark {
       --bg-color: #121212;
       --text-color: #ddd;
+      --frame-bg: #1e1e1e;
     }
 
     body {
@@ -29,11 +31,61 @@
     }
 
     h1 {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       font-weight: 500;
     }
 
+    .frame {
+      background: var(--frame-bg);
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      max-width: 420px; /* controls overall frame size */
+      transition: transform 0.3s ease;
+    }
+
+    .frame:hover {
+      transform: scale(1.02);
+    }
+
     .photo {
-      width: auto;
-      max-width: 384px; /* ~4 inches */
-      max-height: 24
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .toggle-theme {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.1);
+      border: none;
+      border-radius: 25px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+
+    .toggle-theme:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 600px) {
+      .frame {
+        max-width: 85%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-theme" onclick="toggleTheme()">🌙 Dark</button>
+  <h1>Beautiful Family</h1>
+  
+  <div class="frame">
+    <img src="IMG_20250526_192157.jpg" alt="Family Photo" class="photo" />
+  </div>
+
+  <script
