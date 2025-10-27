@@ -4,20 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Beautiful Family</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+  <!-- Cute and elegant fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
+    /* 🌸 Base Theme (Auto Dark Mode) */
     :root {
-      --bg-color: #f4f4f4;
-      --text-color: #222;
-      --frame-bg: #fff;
+      --bg-color: #fff5f8;
+      --text-color: #5a4a4a;
+      --frame-bg: #ffffff;
+      --accent-color: #ff9ecb;
+      --shadow-color: rgba(255, 170, 200, 0.4);
     }
 
-    body.dark {
-      --bg-color: #121212;
-      --text-color: #eee;
-      --frame-bg: #1e1e1e;
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #201c1e;
+        --text-color: #fceef5;
+        --frame-bg: #2d2a2b;
+        --accent-color: #ff80b5;
+        --shadow-color: rgba(255, 128, 181, 0.3);
+      }
     }
 
+    /* 🌷 Page Style */
     body {
       background: var(--bg-color);
       color: var(--text-color);
@@ -27,86 +38,105 @@
       justify-content: center;
       min-height: 100vh;
       margin: 0;
-      transition: background 0.3s, color 0.3s;
       font-family: "Poppins", sans-serif;
+      transition: background 0.5s, color 0.5s;
       overflow: hidden;
     }
 
     h1 {
-      margin-bottom: 1rem;
-      font-weight: 600;
-      font-size: 2.5rem;
       font-family: "Dancing Script", cursive;
-      letter-spacing: 1px;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--accent-color);
+      text-shadow: 2px 2px 6px var(--shadow-color);
     }
 
+    /* 🖼️ Photo Frame */
     .frame {
       background: var(--frame-bg);
-      padding: 15px;
-      border-radius: 20px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+      padding: 20px;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px var(--shadow-color);
+      border: 6px solid var(--accent-color);
       transition: transform 0.3s ease;
     }
 
     .photo {
-      border-radius: 15px;
-      display: block;
-      object-fit: cover;
-      transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+      border-radius: 20px;
       width: 576px;  /* 6 inches */
       height: 384px; /* 4 inches */
-      max-width: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+      max-width: 90vw;
     }
 
-    .toggle-theme {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(0, 0, 0, 0.1);
-      border: none;
-      border-radius: 25px;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.3s;
-      font-family: "Poppins", sans-serif;
-    }
-
-    .toggle-theme:hover {
-      background: rgba(0, 0, 0, 0.2);
-    }
-
-    /* Floating draggable zoom buttons */
+    /* 🩷 Floating Zoom Controls (Draggable) */
     .zoom-controls {
       position: fixed;
-      bottom: 50px;
-      right: 50px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      bottom: 60px;
+      right: 60px;
+      background: var(--accent-color);
+      border-radius: 50px;
+      box-shadow: 0 8px 25px var(--shadow-color);
       display: flex;
-      gap: 10px;
-      padding: 10px 15px;
+      gap: 12px;
+      padding: 12px 18px;
       cursor: move;
       user-select: none;
-      transition: background 0.3s;
       font-family: "Poppins", sans-serif;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .zoom-controls:hover {
+      transform: scale(1.05);
     }
 
     .zoom-controls button {
-      background: #007bff;
-      color: white;
+      background: white;
+      color: var(--accent-color);
       border: none;
-      border-radius: 10px;
-      padding: 8px 14px;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 1.4rem;
+      font-weight: bold;
       cursor: pointer;
-      font-size: 1.1rem;
-      font-weight: 500;
-      transition: background 0.3s;
+      box-shadow: 0 3px 10px var(--shadow-color);
+      transition: all 0.3s ease;
     }
 
     .zoom-controls button:hover {
-      background: #0056b3;
+      background: var(--accent-color);
+      color: white;
+      transform: scale(1.15);
+    }
+
+    /* 🌼 Floating Decorative Hearts */
+    .hearts {
+      position: fixed;
+      top: 10%;
+      left: 5%;
+      font-size: 2rem;
+      color: var(--accent-color);
+      opacity: 0.6;
+      animation: float 6s infinite ease-in-out alternate;
+    }
+
+    .hearts:nth-child(2) {
+      left: 90%;
+      top: 15%;
+      animation-delay: 2s;
+    }
+
+    .hearts:nth-child(3) {
+      left: 50%;
+      top: 80%;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      from { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+      to { transform: translateY(-20px) rotate(20deg); opacity: 1; }
     }
 
     @media (max-width: 600px) {
@@ -117,12 +147,21 @@
       .zoom-controls {
         bottom: 20px;
         right: 20px;
+        padding: 8px 12px;
+      }
+      .zoom-controls button {
+        width: 40px;
+        height: 40px;
       }
     }
   </style>
 </head>
+
 <body>
-  <button class="toggle-theme" onclick="toggleTheme()">🌙 Dark</button>
+  <div class="hearts">💖</div>
+  <div class="hearts">💞</div>
+  <div class="hearts">💕</div>
+
   <h1>Beautiful Family</h1>
 
   <div class="frame">
@@ -135,16 +174,7 @@
   </div>
 
   <script>
-    // Theme toggle
-    function toggleTheme() {
-      document.body.classList.toggle("dark");
-      const btn = document.querySelector(".toggle-theme");
-      btn.textContent = document.body.classList.contains("dark")
-        ? "☀️ Light"
-        : "🌙 Dark";
-    }
-
-    // Zoom
+    // Zoom logic
     let scale = 1;
     const img = document.getElementById("familyPhoto");
     function zoom(delta) {
