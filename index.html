@@ -34,10 +34,14 @@
     }
 
     .photo {
-      max-width: 90%;
+      width: auto;
+      max-width: 576px; /* 6 inches */
+      height: auto;
+      max-height: 384px; /* 4 inches */
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease;
+      object-fit: cover;
     }
 
     .photo:hover {
@@ -60,19 +64,14 @@
     .toggle-theme:hover {
       background: rgba(0, 0, 0, 0.2);
     }
+
+    @media (max-width: 600px) {
+      .photo {
+        max-width: 90%;
+        max-height: none;
+      }
+    }
   </style>
 </head>
 <body>
-  <button class="toggle-theme" onclick="toggleTheme()">🌙 Dark</button>
-  <h1>Beautiful Family</h1>
-  <img src="IMG_20250526_192157.jpg" alt="Family Photo" class="photo" />
-
-  <script>
-    function toggleTheme() {
-      document.body.classList.toggle("dark");
-      const btn = document.querySelector(".toggle-theme");
-      btn.textContent = document.body.classList.contains("dark") ? "☀️ Light" : "🌙 Dark";
-    }
-  </script>
-</body>
-</html>
+  <button class="toggle-theme" onclick="
